@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        /* Add your custom styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://assets.skyfilabs.com/images/blog/disease-prediction-using-machine-learning.webp'); /* Add your background image URL */
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #ffffff;
+            animation: fadeIn 2s ease-in-out; /* Add a slow fade-in animation to the entire page */
+        }
+        nav {
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background for the nav */
+            color: #ffffff;
+            border-bottom: 1px solid #23324d;
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1s ease-in-out, slideFromTop 1s ease-in-out; /* Add fade-in and slide animation */
+        }
+        @keyframes slideFromTop {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        nav h1 {
+            margin: 0;
+            padding: 20px;
+            font-size: 32px;
+            color: #64ffda;
+            animation: fadeIn 1s ease-in-out, scaleUp 1s ease-in-out; /* Add fade-in and scale animation */
+        }
+        @keyframes scaleUp {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-end; /* Adjust content spacing */
+        }
+        nav ul li {
+            margin-left: 20px;
+            animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+        }
+        nav ul li:first-child {
+            margin-left: 0;
+        }
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #64ffda;
+        }
+        .container {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background for the content */
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out, scaleUp 1s ease-in-out; /* Add fade-in and scale animation */
+            transition: transform 0.5s ease-in-out; /* Add a scale-in animation on hover */
+        }
+        .container:hover {
+            transform: scale(1.02); /* Scale up slightly on hover */
+        }
+        .container h1 {
+            font-size: 28px;
+            color: #64ffda;
+            animation: fadeIn 1s ease-in-out, slideFromLeft 1s ease-in-out; /* Add fade-in and slide animation */
+        }
+        @keyframes slideFromLeft {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        .container p {
+            font-size: 18px;
+        }
+        .btn-primary {
+            background-color: #64ffda;
+            color: #0a192f;
+            border: none;
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            background-color: #45a29e;
+        }
+        .contact-form {
+            padding-right: 20px; /* Add padding to the right of the form container */
+            animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background for the footer */
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0; /* Add spacing above the footer */
+            border-top: 1px solid #23324d;
+            margin-top: 5px;
+            animation: fadeIn 2s ease-in-out, slideFromBottom 2s ease-in-out; /* Add a slow fade-in and slide animation to the footer */
+        }
+        @keyframes slideFromBottom {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        /* Add a simple fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .help {
+            padding-right: 8px;
+        }
+    </style>
+    <title>SkinAI - Home</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div>
+            <h1>SkinAI</h1>
+        </div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/diagnosis" class="diagnosis">Diagnosis</a></li>
+            <li><a href="/feedback" class="feedback">Feedback</a></li>
+            <li><a href="/help" class="help">Help</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Welcome to SkinAI</h1>
+        <p>
+            SkinAI is a cutting-edge AI-powered skin lesions diagnosis tool designed to assist in dermatology. Our advanced model can accurately identify and provide detailed information about various skin conditions.
+        </p>
+        <p>
+            SkinAI leverages state-of-the-art artificial intelligence and deep learning technologies to analyze extreme skin conditions or lesions like:
+        </p>
+        <ul>
+            <li>Actinic keratosis</li>
+            <li>Basal cell carcinoma (bcc)</li>
+            <li>Benign keratosis like lesions (bkl)</li>
+            <li>Dermatofibroma (df)</li>
+            <li>Melanoma (mel)</li>
+            <li>Melanocytic nevi (nv)"</li>
+            <li>Vascular lesions (vasc)</li>
+        </ul>
+        <p>
+            Our platform is designed to assist dermatologists and healthcare professionals in their diagnosis and provide patients with valuable information about their skin health.
+        </p>
+        <p>
+            To get started, click the "Get Started" button below to perform a comprehensive skin lesion diagnosis.
+        </p>
+        <button class="btn btn-primary" onclick="window.location.href='/diagnosis'">Get Started</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 SkinAI. All Rights Reserved
+
+    </footer>
+
+    <!-- Add Bootstrap JS (optional) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

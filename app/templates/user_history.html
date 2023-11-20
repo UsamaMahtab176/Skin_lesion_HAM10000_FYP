@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User History</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        /* Add your custom styles here */
+        /* Example styles for the user history page */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://assets.skyfilabs.com/images/blog/disease-prediction-using-machine-learning.webp');
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #ffffff;
+        }
+        .history-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+        }
+        .history-container h1 {
+            font-size: 28px;
+            color: #64ffda;
+        }
+        .history-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .history-container th, .history-container td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #23324d;
+        }
+        .history-container th {
+            background-color: #0a192f;
+            color: #64ffda;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="history-container">
+            <h1>User Diagnosis History</h1>
+            {% if user_diagnoses %}
+                <table>
+                    <tr>
+                        <th>Date</th>
+                        <th>Diagnosed Disease</th>
+                        <th>Causes</th>
+                        <th>Medications</th>
+                    </tr>
+                    {% for diagnosis in user_diagnoses %}
+                        <tr>
+                            <td>{{ diagnosis.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td>{{ diagnosis.diagnosed_disease }}</td>
+                            <td>{{ diagnosis.causes }}</td>
+                            <td>{{ diagnosis.medications }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No diagnosis history available.</p>
+            {% endif %}
+            <p><a href="{{ url_for('diagnosis') }}">Back to Diagnosis</a></p>
+        </div>
+    </div>
+    <!-- Add Bootstrap JS (optional) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

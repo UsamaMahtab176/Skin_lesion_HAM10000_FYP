@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinAI - Diagnosis Result</title>
+    <!-- Add your custom CSS styles here -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://assets.skyfilabs.com/images/blog/disease-prediction-using-machine-learning.webp');
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #ffffff;
+            animation: fadeIn 2s ease-in-out; /* Add a slow fade-in animation to the entire page */
+        }
+
+        nav {
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background for the nav */
+            color: #ffffff;
+            border-bottom: 1px solid #23324d;
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+        }
+
+        nav h1 {
+            margin: 0;
+            padding: 10px;
+            font-size: 32px;
+            color: #64ffda;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-end; /* Adjust content spacing */
+        }
+
+        nav ul li {
+            margin-left: 20px;
+            animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+        }
+
+        nav ul li:first-child {
+            margin-left: 0;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #64ffda;
+        }
+
+        /* Main content */
+        .details {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background for the content */
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #64ffda;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #64ffda;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background for the footer */
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0; /* Add spacing above the footer */
+            border-top: 1px solid #23324d;
+            margin-top: 10px;
+            animation: fadeIn 2s ease-in-out; /* Add a slow fade-in animation to the footer */
+        }
+        .home, .diagnosis , .feedback , .help {
+            padding-right: 15px;
+            padding-bottom: 6px;
+        }
+
+        .heading1{
+            justify-content: center;
+        }
+
+        /* Add a simple fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div>
+            <h1>SkinAI</h1>
+        </div>
+        <ul>
+            <li class="home"><a href="/">Home</a></li>
+            <li class="diagnosis"><a href="/diagnosis">Diagnosis</a></li>
+            <li class="feedback"><a href="/feedback">Feedback</a></li>
+            <li class="help"><a href="/help">Help</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main content -->
+    <div class="details">
+        <h1 class="heading1">Diagnosis Result</h1>
+        <h2>Patient's Details</h2>
+        <p><strong>Name:</strong> {{ name }}</p>
+        <p><strong>Email:</strong> {{ email }}</p>
+        <p><strong>Age:</strong> {{ age }}</p>
+        <p><strong>Height:</strong> {{ height }} cm</p>
+        <p><strong>Weight:</strong> {{ weight }} kg</p>
+        <p><strong>Previous Medical History:</strong> {{ medical_history }}</p>
+
+        <h2>Diagnosis Details</h2>
+        <p><strong>Diagnosed Skin Lesion:</strong> {{ diagnosed_disease }}</p>
+        <p><strong>Symptoms:</strong> {{ symptoms }}</p>
+        <p><strong>Causes:</strong> {{ causes }}</p>
+        <p><strong>Precautions:</strong> {{ precautions }}</p>
+        <p><strong>Medications:</strong> {{ medications }}</p>
+
+        <!-- Add options for downloading the report and sending it via email here -->
+
+            <!-- Option to Download Report -->
+    <button id="downloadReportButton">Download Report</button>
+
+    <!-- Option to Send Report via Email -->
+    <button id="sendEmailButton">Send Report via Email</button>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 SkinAI</p>
+    </footer>
+
+    <script>
+        // Function to send an AJAX request to /generate_pdf_report
+        function generate_and_download_pdf() {
+            // Send a GET request to /generate_pdf_report
+            fetch('/generate_pdf_report')
+                .then(response => response.blob())
+                .then(blob => {
+                    // Create a temporary link to trigger the download
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = 'diagnosis_report.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    
+        // Attach the function to the button click event
+        document.getElementById('downloadReportButton').addEventListener('click', generate_and_download_pdf);
+
+        function sendReportByEmail() {
+        // Retrieve the user's email from the session
+        const recipient_email = '{{ session["user_email"] }}';
+
+        // Create a FormData object to send data as form parameters
+        const formData = new FormData();
+        formData.append('recipient_email', recipient_email);
+
+        // Send a POST request to /send_email with form data
+        fetch('/send_email', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+            alert(data.message);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while sending the email.');
+        });
+    }
+
+    // Attach the function to the button click event
+    document.getElementById('sendEmailButton').addEventListener('click', sendReportByEmail);
+</script>
+    </script>
+    
+</body>
+</html>

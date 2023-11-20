@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - User Management</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://assets.skyfilabs.com/images/blog/disease-prediction-using-machine-learning.webp');
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #ffffff;
+            animation: fadeIn 2s ease-in-out;
+            margin: 0; /* Remove default body margin */
+            padding: 0; /* Remove default body padding */
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            border-bottom: 1px solid #23324d;
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1s ease-in-out, slideFromTop 1s ease-in-out;
+            padding: 20px 0; /* Add padding to the header top and bottom */
+        }
+
+        header h1 {
+            margin: 0;
+            padding: 0;
+            font-size: 32px;
+            color: #64ffda;
+            animation: fadeIn 1s ease-in-out, scaleUp 1s ease-in-out;
+        }
+
+        /* Navigation Styles */
+        nav {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            border-bottom: 1px solid #23324d;
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1s ease-in-out, slideFromTop 1s ease-in-out;
+            margin-bottom: 20px; /* Add margin to separate header and navigation */
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center; /* Center-align menu items */
+        }
+
+        nav ul li {
+            margin-left: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        nav ul li:first-child {
+            margin-left: 0;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #64ffda;
+        }
+
+        /* Content Container Styles */
+        .container {
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out, scaleUp 1s ease-in-out;
+            transition: transform 0.5s ease-in-out;
+            min-height: 100vh; /* Ensure container takes at least full viewport height */
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        .container h1 {
+            font-size: 28px;
+            color: #64ffda;
+            animation: fadeIn 1s ease-in-out, slideFromLeft 1s ease-in-out;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #23324d;
+            position: absolute;
+            bottom: 0; /* Fix footer at the bottom of the screen */
+            width: 100%;
+            animation: fadeIn 2s ease-in-out, slideFromBottom 2s ease-in-out;
+        }
+
+        /* User Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #23324d;
+        }
+
+        th {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #64ffda;
+        }
+
+        /* Delete Button Styles */
+        .delete-button {
+            background-color: #ff4136; /* Red color for delete button */
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        /* Keyframe Animations */
+        @keyframes slideFromTop {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleUp {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideFromLeft {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideFromBottom {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin panel header -->
+    <header>
+        <h1>Admin Panel - User Management</h1>
+    </header>
+
+    <!-- User Management Section -->
+    <section class="container">
+        <h2>User List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in login_users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <form action="{{ url_for('delete_user', user_id=user.id) }}" method="POST">
+                                <input type="hidden" name="user_id" value="{{ user.id }}">
+                                <button class="delete-button" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Admin panel footer -->
+    <footer>
+        <p>&copy; 2023 Your Company</p>
+    </footer>
+</body>
+</html>
